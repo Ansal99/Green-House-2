@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  :root {
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --bg-ivory: #F8F5EF;
+    --bg-cream: #F3EEE5;
+    --bg-sand: #EDE7DC;
+    --forest-deep: #1A2E26;
+    --forest-muted: #2C4339;
+    --sage: #6B7C72;
+    --earth-warm: #84796B;
+    --earth-light: #B8ADA0;
+    --gold-champagne: #C8AC83;
+    --charcoal-warm: #18221E;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-ivory);
+    color: var(--charcoal-warm);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: var(--font-serif);
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Lenis Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F5EF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D0C3;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8ADA0;
+}
+
+/* Luxury Glow & Vignette Effects */
+.luxury-vignette {
+  background: radial-gradient(circle at center, rgba(248, 245, 239, 0) 50%, rgba(243, 238, 229, 0.45) 100%);
+}
+
+.editorial-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(200, 172, 131, 0) 0%, rgba(200, 172, 131, 0.4) 50%, rgba(200, 172, 131, 0) 100%);
+}
+
+/* Wave Animation for Footer */
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-wave {
+  animation: wave 20s linear infinite;
+  will-change: transform;
+}
