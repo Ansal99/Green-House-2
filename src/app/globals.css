@@ -99,3 +99,24 @@ html.lenis, html.lenis body {
   animation: wave 20s linear infinite;
   will-change: transform;
 }
+
+/* Infinite Auto-Loop Marquee for Gallery */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

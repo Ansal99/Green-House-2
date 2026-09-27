@@ -9,12 +9,12 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const heroElement = document.getElementById('home');
-      if (heroElement) {
-        const rect = heroElement.getBoundingClientRect();
-        // The navbar remains in its initial light/transparent state throughout the entire frame sequence,
-        // and only transitions into solid light luxury state when the user scrolls past the hero sequence into the next section.
-        setIsScrolled(rect.bottom <= 80);
+      const targetElement = document.getElementById('intro') || document.getElementById('stay');
+      if (targetElement) {
+        const rect = targetElement.getBoundingClientRect();
+        // The navbar remains transparent over the dark hero canvas,
+        // and transitions into solid luxury state once the rising intro section meets the header.
+        setIsScrolled(rect.top <= 80);
       } else {
         setIsScrolled(window.scrollY > window.innerHeight);
       }

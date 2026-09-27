@@ -3,6 +3,8 @@
 import React from "react";
 import { Navbar } from "@/components/navbar";
 import { HeroSequence } from "@/components/hero-sequence";
+import { IntroSection } from "@/components/intro-section";
+import { RoomsSection } from "@/components/rooms-section";
 import { ServicesSection } from "@/components/services-section";
 import { Footer } from "@/components/footer";
 import { useImagePreloader } from "@/hooks/use-image-preloader";
@@ -16,12 +18,20 @@ export default function HomePage() {
       <Navbar />
 
       <main className="relative w-full">
+        {/* 1. Cinematic 240-Frame Scroll Sequence */}
         <HeroSequence
           getNearestFrame={getNearestFrame}
           loadedProgress={progress}
           isComplete={isComplete}
         />
 
+        {/* 2. Compact Introduction, Google Maps Location & Auto-Loop Gallery */}
+        <IntroSection />
+
+        {/* 3. Rooms & Stays */}
+        <RoomsSection />
+
+        {/* 4. Hotel Services & Facilities */}
         <ServicesSection />
       </main>
 

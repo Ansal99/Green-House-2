@@ -12,9 +12,9 @@ export const HOTEL_INFO = {
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#home' },
+  { label: 'About', href: '#intro' },
   { label: 'Rooms', href: '#stay' },
-  { label: 'Services', href: '#experience' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Services', href: '#services' },
   { label: 'Contact', href: '#contact' },
 ] as const;
 
@@ -69,7 +69,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'interior',
     startProgress: 0.82,
-    endProgress: 1.0,
+    endProgress: 0.92,
     tag: 'SPECTACULAR MOUNTAIN VIEWS',
     title: 'Wake Up to Snowy Peaks',
     description: 'Enjoy morning tea with direct views of snow-capped mountains right from your comfortable bed.',

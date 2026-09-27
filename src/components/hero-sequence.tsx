@@ -28,15 +28,14 @@ export const HeroSequence: React.FC<HeroSequenceProps> = ({
         window.requestAnimationFrame(() => {
           if (!containerRef.current) return;
           const rect = containerRef.current.getBoundingClientRect();
-          const scrollDistance = rect.height - window.innerHeight;
+          // Reserve the final 100vh of scroll track so the last frame stays perfectly stationary while the next section rises over it
+          const playDistance = rect.height - 2 * window.innerHeight;
 
-          if (scrollDistance > 0) {
-            const rawProgress = -rect.top / scrollDistance;
+          if (playDistance > 0) {
+            const rawProgress = -rect.top / playDistance;
             const clamped = Math.min(Math.max(rawProgress, 0), 1);
             setScrollProgress(clamped);
-            // Smoothly play 240 frames up to 92% of the scroll track and hold final frame
-            const frameProgress = Math.min(clamped / 0.92, 1);
-            setFrameIndex(frameProgress * (TOTAL_FRAMES - 1));
+            setFrameIndex(Math.min(clamped, 1) * (TOTAL_FRAMES - 1));
           }
 
           ticking = false;
@@ -59,7 +58,7 @@ export const HeroSequence: React.FC<HeroSequenceProps> = ({
     <section
       ref={containerRef}
       id="home"
-      className="relative w-full h-[450vh] bg-[#16211C]"
+      className="relative w-full h-[480vh] bg-[#16211C]"
     >
       {/* Sticky Fullscreen Canvas Viewport: Remains pinned until entire 240-frame sequence finishes */}
       <div className="sticky top-0 left-0 w-full h-screen h-[100dvh] overflow-hidden bg-[#16211C]">

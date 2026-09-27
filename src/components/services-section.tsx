@@ -182,7 +182,6 @@ export const ServicesSection: React.FC = () => {
       className="relative w-full h-[320vh] bg-[#F8F5EF]"
     >
       {/* Anchor targets */}
-      <div id="stay" className="absolute top-0" />
       <div id="services" className="absolute top-0" />
 
       {/* Pinned / Sticky Viewport: Held in place until all features finish */}
