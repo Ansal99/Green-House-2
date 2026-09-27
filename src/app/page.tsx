@@ -6,6 +6,7 @@ import { HeroSequence } from "@/components/hero-sequence";
 import { IntroSection } from "@/components/intro-section";
 import { RoomsSection } from "@/components/rooms-section";
 import { ServicesSection } from "@/components/services-section";
+import { PricingOffersSection } from "@/components/pricing-offers-section";
 import { Footer } from "@/components/footer";
 import { useImagePreloader } from "@/hooks/use-image-preloader";
 
@@ -33,6 +34,9 @@ export default function HomePage() {
 
         {/* 4. Hotel Services & Facilities */}
         <ServicesSection />
+
+        {/* 5. Pricing & Seasonal Offers */}
+        <PricingOffersSection />
       </main>
 
       <Footer />

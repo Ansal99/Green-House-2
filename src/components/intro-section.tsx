@@ -195,10 +195,42 @@ export const IntroSection: React.FC = () => {
         </div>
 
         {/* Bottom: Dual Counter-Directional Infinite Auto-Play Gallery (Loop de Loops) */}
-        <motion.div
-          initial={{ opacity: 1, y: 0 }}
-          className="space-y-3 pt-3 border-t border-[#E5DECF]"
-        >
+        <div className="space-y-3 pt-3 border-t border-[#E5DECF]">
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+            @keyframes loop-to-right {
+              0% { transform: translate3d(-50%, 0, 0); }
+              100% { transform: translate3d(0%, 0, 0); }
+            }
+            @keyframes loop-to-left {
+              0% { transform: translate3d(0%, 0, 0); }
+              100% { transform: translate3d(-50%, 0, 0); }
+            }
+            .loop-track-right {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              width: max-content !important;
+              animation: loop-to-right 32s linear infinite !important;
+              will-change: transform;
+            }
+            .loop-track-left {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              width: max-content !important;
+              animation: loop-to-left 32s linear infinite !important;
+              will-change: transform;
+            }
+            .loop-track-right:hover,
+            .loop-track-left:hover {
+              animation-play-state: paused !important;
+            }
+          `,
+            }}
+          />
+
           <div className="px-1 text-xs tracking-[0.25em] uppercase text-[#84796B] font-medium">
             Hotel Spaces & Surroundings
           </div>
@@ -209,7 +241,7 @@ export const IntroSection: React.FC = () => {
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-[#F3EEE5] to-transparent z-10" />
 
             {/* Loop 1: Gliding Left to Right */}
-            <div className="flex flex-row flex-nowrap w-max animate-marquee-right py-1">
+            <div className="loop-track-right py-1">
               {row1Items.map((item, index) => (
                 <div
                   key={`r1-${item.title}-${index}`}
@@ -235,7 +267,7 @@ export const IntroSection: React.FC = () => {
             </div>
 
             {/* Loop 2: Gliding Right to Left (Opposite Direction) */}
-            <div className="flex flex-row flex-nowrap w-max animate-marquee-left py-1">
+            <div className="loop-track-left py-1">
               {row2Items.map((item, index) => (
                 <div
                   key={`r2-${item.title}-${index}`}
@@ -260,7 +292,7 @@ export const IntroSection: React.FC = () => {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -246,44 +246,20 @@ export const RoomsSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b border-[#E5DECF]">
           <div className="space-y-3 max-w-2xl">
-            <motion.span
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm tracking-[0.28em] uppercase text-[#84796B] font-medium"
-            >
+            <span className="inline-flex items-center gap-2 text-xs sm:text-sm tracking-[0.28em] uppercase text-[#84796B] font-medium">
               <span className="w-2 h-2 rounded-full bg-[#C8AC83]" />
               Accommodations & Suites
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-serif-luxury text-3xl sm:text-5xl md:text-6xl font-light text-[#1A2E26] leading-tight"
-            >
+            </span>
+            <h2 className="font-serif-luxury text-3xl sm:text-5xl md:text-6xl font-light text-[#1A2E26] leading-tight">
               Our Stays & <span className="italic text-[#2C4339]">Sanctuaries</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="text-sm sm:text-base text-[#6B7C72] font-light leading-relaxed"
-            >
+            </h2>
+            <p className="text-sm sm:text-base text-[#6B7C72] font-light leading-relaxed">
               Every room at Green House is handcrafted from Himalayan cedar timber, local stone, and glass—angled toward the morning sun and snow-dusted Dhauladhar peaks.
-            </motion.p>
+            </p>
           </div>
 
           {/* Filter Pills */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-            className="flex flex-wrap items-center gap-2"
-          >
+          <div className="flex flex-wrap items-center gap-2">
             {[
               { id: "all", label: "All Stays (5)" },
               { id: "mountain", label: "Mountain View" },
@@ -302,7 +278,7 @@ export const RoomsSection: React.FC = () => {
                 {tab.label}
               </button>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {/* Room Cards Grid */}
@@ -310,11 +286,10 @@ export const RoomsSection: React.FC = () => {
           {filteredRooms.map((room, index) => (
             <motion.div
               key={room.id}
-              initial={{ opacity: 0, y: 45, scale: 0.96 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: (index % 3) * 0.12 }}
-              whileHover={{ y: -6, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
               className="flex flex-col h-full"
             >
               <Card className="h-full rounded-3xl overflow-hidden border border-[#E0D7C7] bg-[#F8F5EF] shadow-md hover:shadow-xl transition-all duration-500 flex flex-col group p-0">
