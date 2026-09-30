@@ -8,6 +8,7 @@ import { RoomsSection } from "@/components/rooms-section";
 import { ServicesSection } from "@/components/services-section";
 import { PricingOffersSection } from "@/components/pricing-offers-section";
 import { HostTeamSection } from "@/components/host-team-section";
+import { FAQReviewsSection } from "@/components/faq-reviews-section";
 import { Footer } from "@/components/footer";
 import { useImagePreloader } from "@/hooks/use-image-preloader";
 
@@ -41,6 +42,9 @@ export default function HomePage() {
 
         {/* 6. Host & Estate Team */}
         <HostTeamSection />
+
+        {/* 7. FAQs & Guest Reviews */}
+        <FAQReviewsSection />
       </main>
 
       <Footer />
