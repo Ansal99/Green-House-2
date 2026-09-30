@@ -9,11 +9,6 @@ import {
   Maximize2,
   Check,
   X,
-  ShieldCheck,
-  Coffee,
-  HeartHandshake,
-  Flame,
-  ArrowUpRight,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -34,7 +29,6 @@ export interface RoomItem {
   size: string;
   amenities: string[];
   highlights: string[];
-  popular?: boolean;
 }
 
 const ROOMS_DATA: RoomItem[] = [
@@ -42,10 +36,10 @@ const ROOMS_DATA: RoomItem[] = [
     id: "deluxe-room",
     name: "Deluxe Pine Room",
     category: "all",
-    badge: "Cozy Wood Stay",
+    badge: "Popular Stay",
     price: "₹7,500",
     shortDesc:
-      "A cozy wooden haven with private sun balcony, warm cedar paneling, and sweeping views of morning valley mist.",
+      "A cozy wooden haven with private sun balcony, warm cedar paneling, and sweeping views of the morning mist rolling through pine trees.",
     fullDesc:
       "Designed for deep rest and quiet mornings. The Deluxe Pine Room is enveloped in hand-planed Himalayan cedar that infuses the air with a soothing natural fragrance. Floor-to-ceiling glass doors open onto a private wooden balcony where morning tea is accompanied by crisp mountain air.",
     image:
@@ -73,16 +67,15 @@ const ROOMS_DATA: RoomItem[] = [
       "Artisanal herbal toiletries crafted with Himalayan lavender",
       "Dedicated room service hosted by Rahul Kapoor’s team",
     ],
-    popular: false,
   },
   {
     id: "mountain-view",
     name: "Dhauladhar Mountain View Room",
     category: "mountain",
-    badge: "Most Popular",
+    badge: "Panoramic View",
     price: "₹9,800",
     shortDesc:
-      "Direct panoramas of snow-crested Dhauladhar peaks, cozy wood fireplace, and an expansive sun terrace.",
+      "Wake up directly to breathtaking panoramas of the snow-crested Dhauladhar peaks, with an expansive private sun terrace and fireplace.",
     fullDesc:
       "Our most sought-after mountain sanctuary. Elevated on the upper tier of Green House, this room commands an unhindered 180-degree view of the jagged Dhauladhar snowline. Featuring a cozy cast-iron wood fireplace and panoramic sun terrace, it offers front-row seats to spectacular Himalayan sunrises.",
     image:
@@ -110,7 +103,6 @@ const ROOMS_DATA: RoomItem[] = [
       "Hand-carved wooden reading nook overlooking the valley",
       "Complimentary evening tea & fresh bakery snacks",
     ],
-    popular: true,
   },
   {
     id: "garden-room",
@@ -119,7 +111,7 @@ const ROOMS_DATA: RoomItem[] = [
     badge: "Nature Retreat",
     price: "₹8,200",
     shortDesc:
-      "Serene ground-level retreat opening directly onto our aromatic herb garden and ancient stone patio.",
+      "Serene ground-level retreat opening directly onto our aromatic herb garden and ancient stone patio, nestled under towering deodar boughs.",
     fullDesc:
       "Immerse yourself in forest tranquility. The Garden Cedar Room connects directly with Green House's private alpine herb garden. Step out barefoot onto cool morning stone slates, breathe in fresh thyme and cedar scent, and enjoy unhurried reading on your private patio.",
     image:
@@ -147,7 +139,6 @@ const ROOMS_DATA: RoomItem[] = [
       "Quiet meditation and reading terrace",
       "Zero noise from corridors or upper floors",
     ],
-    popular: false,
   },
   {
     id: "himalayan-suite",
@@ -156,7 +147,7 @@ const ROOMS_DATA: RoomItem[] = [
     badge: "Signature Suite",
     price: "₹14,500",
     shortDesc:
-      "Our premier 650-sq-ft suite with separate living lounge, dual fireplaces, and wrap-around sunset deck.",
+      "Our premier suite with separate lounge, private stone fireplace, wrap-around corner glass walls, and dedicated personal host service.",
     fullDesc:
       "The pinnacle of Green House hospitality. An expansive 650-sq-ft private residence featuring high cathedral ceilings with exposed cedar trusses. With a separate fireplace living room, double-vanity en-suite, and 180-degree wrap-around glass views, it offers unmatched luxury in Dharamkot.",
     image:
@@ -184,7 +175,6 @@ const ROOMS_DATA: RoomItem[] = [
       "Evening complimentary chef’s special snack platter",
       "Priority check-in & flexible departure",
     ],
-    popular: false,
   },
   {
     id: "family-room",
@@ -193,7 +183,7 @@ const ROOMS_DATA: RoomItem[] = [
     badge: "Family & Groups",
     price: "₹18,000",
     shortDesc:
-      "Spacious two-level Swiss-Himalayan chalet with cedar loft, twin lofts, and two full stone bathrooms.",
+      "A spacious two-level chalet room crafted with mezzanine wooden lofts, multiple balconies, and abundant space for families and small groups.",
     fullDesc:
       "The ideal mountain getaway for families or lifelong friends. Designed like a traditional Swiss-Himalayan chalet, this suite features a master bedroom downstairs and a charming cozy cedar loft above with twin beds. Multiple private balconies ensure everyone enjoys quiet moments with the mountains.",
     image:
@@ -212,7 +202,7 @@ const ROOMS_DATA: RoomItem[] = [
       "Two Private Forest Balconies",
       "Family Tea & Snack Kitchenette",
       "Two En-Suite Bathrooms",
-      "Curated Mountain Books & Games",
+      "Curated Mountain Books & Board Games",
       "Heated Floors Throughout",
     ],
     highlights: [
@@ -221,15 +211,7 @@ const ROOMS_DATA: RoomItem[] = [
       "Large family dining table for shared meals and stories",
       "Special organic children's menu available on request",
     ],
-    popular: false,
   },
-];
-
-const DIRECT_INCLUSIONS_STRIP = [
-  { icon: ShieldCheck, label: "Best Direct Rate Guarantee" },
-  { icon: Coffee, label: "Daily Kangra Organic Breakfast" },
-  { icon: Flame, label: "Heated Cedar Rooms & Fireplaces" },
-  { icon: HeartHandshake, label: "Direct Concierge by Rahul Kapoor" },
 ];
 
 export const RoomsSection: React.FC = () => {
@@ -245,14 +227,9 @@ export const RoomsSection: React.FC = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
-      const input = document.querySelector(
-        'input[placeholder*="Room" i], input[type="email"]'
-      ) as HTMLInputElement;
-      if (input) {
-        if (input.placeholder && input.placeholder.toLowerCase().includes("room") && roomName) {
-          input.value = roomName;
-        }
-        input.focus();
+      if (roomName) {
+        const input = document.querySelector('input[placeholder*="Room"]') as HTMLInputElement;
+        if (input) input.value = roomName;
       }
     }
   };
@@ -262,24 +239,22 @@ export const RoomsSection: React.FC = () => {
       id="stay"
       className="relative w-full bg-[#FAF7F2] text-[#1A2E26] py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-12 border-b border-[#E5DECF] overflow-hidden"
     >
-      {/* Anchor for Rooms and Tariffs links */}
+      {/* Anchor for Rooms link */}
       <div id="rooms" className="absolute top-0" />
-      <div id="tariffs" className="absolute top-0" />
 
       <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
-        
-        {/* Section Header: Merged Rooms & Direct Nightly Tariffs */}
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5DECF]">
           <div className="space-y-2 max-w-2xl">
             <span className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-[#84796B] font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C8AC83]" />
-              Accommodations, Suites & Nightly Tariffs
+              Accommodations & Suites
             </span>
             <h2 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-light text-[#1A2E26] leading-tight">
-              Our Stays & <span className="italic text-[#2C4339]">Direct Pricing</span>
+              Our Stays & <span className="italic text-[#2C4339]">Sanctuaries</span>
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7C72] font-light leading-relaxed max-w-xl">
-              Transparent nightly rates with zero hidden charges. Every handcrafted room includes warm cedar heating, private sun balconies, and fresh morning Kangra valley breakfast.
+              Every room at Green House is handcrafted from Himalayan cedar timber, local stone, and glass—angled toward the morning sun and snow-dusted Dhauladhar peaks.
             </p>
           </div>
 
@@ -306,20 +281,7 @@ export const RoomsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Direct Inclusions Transparency Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-3.5 rounded-xl bg-[#EDE7DC]/70 border border-[#E0D7C7] text-xs">
-          {DIRECT_INCLUSIONS_STRIP.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div key={idx} className="flex items-center gap-2 text-[#2C4339]">
-                <Icon className="w-4 h-4 text-[#C8AC83] shrink-0" />
-                <span className="text-[11px] font-medium truncate">{item.label}</span>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Room Cards Grid: Space-Efficient, Clear Pricing & Direct Booking */}
+        {/* Room Cards Grid - Compact & Highly Utilized */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filteredRooms.map((room, index) => (
             <motion.div
@@ -327,14 +289,10 @@ export const RoomsSection: React.FC = () => {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
               className="flex flex-col h-full"
             >
-              <Card
-                className={`h-full rounded-2xl overflow-hidden border bg-[#F8F5EF] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group p-0 ${
-                  room.popular ? "border-[#C8AC83] ring-1 ring-[#C8AC83]/30" : "border-[#E0D7C7]"
-                }`}
-              >
+              <Card className="h-full rounded-2xl overflow-hidden border border-[#E0D7C7] bg-[#F8F5EF] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group p-0">
                 {/* Image Stage */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#EDE7DC]">
                   <img
@@ -342,31 +300,29 @@ export const RoomsSection: React.FC = () => {
                     alt={room.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                   {/* Top Badges */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-[9px] tracking-[0.18em] uppercase text-[#F8F5EF] font-medium">
+                    <span className="px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[9px] tracking-[0.2em] uppercase text-[#F8F5EF] font-medium">
                       {room.badge}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#1A2E26]/95 backdrop-blur-md text-[11px] font-medium text-[#FAF6EE] shadow-sm border border-[#C8AC83]/40">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#1A2E26]/90 backdrop-blur-md text-[11px] font-medium text-[#FAF6EE] shadow-sm">
                       {room.price} <span className="text-[9px] text-[#C8AC83]">/ night</span>
                     </span>
                   </div>
 
                   <div className="absolute bottom-2.5 left-3 text-[11px] font-serif-luxury italic text-white/90">
-                    Dharamkot, 2,100m · Incl. Breakfast
+                    Dharamkot, 2,100m
                   </div>
                 </div>
 
                 {/* Content Body */}
                 <div className="p-4 sm:p-5 flex flex-col justify-between flex-grow space-y-3.5">
                   <div className="space-y-1.5">
-                    <div className="flex items-baseline justify-between">
-                      <h3 className="font-serif-luxury text-xl sm:text-2xl font-light text-[#1A2E26] group-hover:text-[#2C4339] transition-colors leading-snug">
-                        {room.name}
-                      </h3>
-                    </div>
+                    <h3 className="font-serif-luxury text-xl sm:text-2xl font-light text-[#1A2E26] group-hover:text-[#2C4339] transition-colors leading-snug">
+                      {room.name}
+                    </h3>
                     <p className="text-xs text-[#6B7C72] leading-relaxed font-light line-clamp-2">
                       {room.shortDesc}
                     </p>
@@ -414,16 +370,15 @@ export const RoomsSection: React.FC = () => {
                     <Button
                       variant="outline"
                       onClick={() => setSelectedRoom(room)}
-                      className="w-full h-9 rounded-full border-[#C8AC83]/70 text-[#1A2E26] hover:bg-[#EDE7DC] text-xs uppercase tracking-wider font-medium"
+                      className="w-full h-9 rounded-full border-[#C8AC83]/60 text-[#1A2E26] hover:bg-[#EDE7DC] text-xs uppercase tracking-wider font-medium"
                     >
                       Explore Room
                     </Button>
                     <Button
                       onClick={() => handleBookClick(room.name)}
-                      className="w-full h-9 rounded-full bg-[#1A2E26] hover:bg-[#2C4339] text-[#F8F5EF] text-xs uppercase tracking-wider font-medium shadow-sm flex items-center justify-center gap-1"
+                      className="w-full h-9 rounded-full bg-[#1A2E26] hover:bg-[#2C4339] text-[#F8F5EF] text-xs uppercase tracking-wider font-medium shadow-sm"
                     >
-                      <span>Book Direct</span>
-                      <ArrowUpRight className="w-3 h-3 text-[#C8AC83]" />
+                      Book Now
                     </Button>
                   </div>
                 </div>
@@ -463,7 +418,7 @@ export const RoomsSection: React.FC = () => {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="space-y-6 sm:space-y-8">
+              <div className="space-y-8">
                 {/* Header & Title */}
                 <div>
                   <div className="flex items-center gap-3 text-xs tracking-[0.25em] uppercase text-[#84796B] font-medium mb-1">
@@ -477,7 +432,7 @@ export const RoomsSection: React.FC = () => {
                     </h3>
                     <div className="text-xl sm:text-2xl font-serif-luxury text-[#1A2E26]">
                       {selectedRoom.price}{" "}
-                      <span className="text-xs text-[#84796B] font-sans font-normal">/ night (incl. breakfast & taxes)</span>
+                      <span className="text-xs text-[#84796B] font-sans font-normal">/ night (incl. taxes)</span>
                     </div>
                   </div>
                 </div>
@@ -496,7 +451,7 @@ export const RoomsSection: React.FC = () => {
                 </div>
 
                 {/* Specs Strip */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 sm:p-5 rounded-2xl bg-[#F3EEE5] border border-[#E5DECF] text-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-[#F3EEE5] border border-[#E5DECF] text-xs">
                   <div>
                     <span className="block text-[10px] uppercase text-[#84796B] tracking-widest">Bed Type</span>
                     <span className="font-medium text-[#1A2E26] mt-0.5 block">{selectedRoom.bed}</span>
@@ -516,23 +471,23 @@ export const RoomsSection: React.FC = () => {
                 </div>
 
                 {/* Description */}
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <h4 className="text-xs uppercase tracking-widest text-[#84796B] font-semibold">
                     The Sanctuary Experience
                   </h4>
-                  <p className="text-sm text-[#6B7C72] font-light leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#6B7C72] font-light leading-relaxed">
                     {selectedRoom.fullDesc}
                   </p>
                 </div>
 
                 {/* Highlights Checklist */}
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   <h4 className="text-xs uppercase tracking-widest text-[#84796B] font-semibold">
                     Signature Room Highlights
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#2C4339]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {selectedRoom.highlights.map((highlight) => (
-                      <div key={highlight} className="flex items-start gap-2.5">
+                      <div key={highlight} className="flex items-start gap-2.5 text-xs text-[#2C4339]">
                         <Check className="w-4 h-4 text-[#C8AC83] shrink-0 mt-0.5" />
                         <span>{highlight}</span>
                       </div>
@@ -541,15 +496,15 @@ export const RoomsSection: React.FC = () => {
                 </div>
 
                 {/* All Amenities */}
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   <h4 className="text-xs uppercase tracking-widest text-[#84796B] font-semibold">
-                    Complete Inclusions & Facilities
+                    Complete Facilities
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedRoom.amenities.map((item) => (
                       <span
                         key={item}
-                        className="px-3 py-1 rounded-full bg-[#EDE7DC] text-xs text-[#1A2E26] font-medium"
+                        className="px-3 py-1.5 rounded-full bg-[#EDE7DC] text-xs text-[#1A2E26] font-medium"
                       >
                         {item}
                       </span>
@@ -558,24 +513,24 @@ export const RoomsSection: React.FC = () => {
                 </div>
 
                 {/* Bottom Modal CTA */}
-                <div className="pt-5 border-t border-[#E5DECF] flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-6 border-t border-[#E5DECF] flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="text-xs text-[#84796B]">
-                    <span>Hosted directly by Rahul Kapoor · Check-in 1:00 PM · Check-out 11:00 AM</span>
+                    <span>Hosted by Rahul Kapoor · Check-in 1:00 PM · Check-out 11:00 AM</span>
                   </div>
                   <div className="flex items-center gap-3 w-full sm:w-auto">
                     <Button
                       variant="outline"
                       onClick={() => setSelectedRoom(null)}
-                      className="flex-1 sm:flex-none rounded-full px-5 text-xs uppercase tracking-wider"
+                      className="flex-1 sm:flex-none rounded-full px-6 text-xs uppercase tracking-wider"
                     >
-                      Close
+                      Back to Rooms
                     </Button>
                     <Button
                       onClick={() => {
                         setSelectedRoom(null);
                         handleBookClick(selectedRoom.name);
                       }}
-                      className="flex-1 sm:flex-none rounded-full px-7 bg-[#1A2E26] text-[#F8F5EF] hover:bg-[#2C4339] text-xs uppercase tracking-wider"
+                      className="flex-1 sm:flex-none rounded-full px-8 bg-[#1A2E26] text-[#F8F5EF] hover:bg-[#2C4339] text-xs uppercase tracking-wider"
                     >
                       Book This Room
                     </Button>
